@@ -1,25 +1,41 @@
 import React , { useState } from "react";
 import { Link ,NavLink } from "react-router-dom"
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 
 export default function Login(){
-
-   
         const [email, setEmail] = useState('');
         const [password, setPassword] = useState('');
+
+        const navgator = useNavigate()
       
         const handleSubmit = (e) => {
           e.preventDefault();
-          try {
-            const response = axios.post("http://localhost:8000/api/v1/users/login",{
-              email,
-              password
-            })
-          } catch (error) {
-            console.log("something went worng while sending the data from frontend",error)
-          }
+          // try {
+          //   const response = axios.post("http://localhost:8000/api/v1/users/login",{
+          //     email,
+          //     password
+          //   })
+          //   console.log(respons)
+          // } catch (error) {
+          //   console.log("something went worng while sending the data from frontend",error)
+          // }
+
+           axios.post("http://localhost:8000/api/v1/users/login",{
+                email,
+                password
+              })
+              .then( (response) =>{
+                console.log(response.data.data.user._id)
+                localStorage.setItem("accessToken",response.data.data.accessToken)
+                localStorage.setItem("userId" , response.data.data.user._id)
+                navgator("/todo")
+              })
+              .catch( (error)=>{
+                console.log(error)
+              } )
         };
       
         return (

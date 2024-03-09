@@ -1,8 +1,26 @@
 import React from "react";
-import { Link , NavLink } from "react-router-dom"
+import { Link , NavLink , useNavigate } from "react-router-dom"
+import axios from "axios";
 
 
 export default function Header() {
+    const navigate = useNavigate()
+    const handleSumit  = (e)=>{
+        const userId = localStorage.getItem('userId')
+        console.log(userId)
+        try {
+            const response = axios.get("http://localhost:8000/api/v1/users/logout",{
+                params : {userId}
+            })
+            localStorage.removeItem('userId')
+            localStorage.removeItem('accessToken')
+            console.log(response)
+            navigate("/login")
+            
+        } catch (error) {
+            console.log("something went wrong while logout",error)
+        }
+    }
     return (
         <header className="shadow sticky z-50 top-0">
             <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5">
@@ -20,6 +38,13 @@ export default function Header() {
                             className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
                         >
                             Log in
+                        </Link>
+                        <Link
+                            
+                            onClick={handleSumit}
+                            className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
+                        >
+                            Log out
                         </Link>
                         <Link
                             to="/register"

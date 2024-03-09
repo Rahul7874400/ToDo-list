@@ -6,6 +6,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Layout from './Layout.jsx'
 import Home from './components/Home/Home.jsx'
 import Login from './components/Login/Login.jsx'
+import TodoForm from './components/ToDo/ToDo.jsx'
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,14 @@ const router = createBrowserRouter([
       {
         path : "/register",
         element : <Home/>
+      },
+      {
+        path : "/register",
+        element : <Home/>
+      },
+      {
+        path : "/todo",
+        element : <TodoForm/>
       }
     ]
   }

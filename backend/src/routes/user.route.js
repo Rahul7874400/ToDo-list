@@ -9,7 +9,7 @@ router.route("/login").post(userLogin)
 
 //secure
 
-router.route("/logout").post(verifyjwt , userLogout)
+router.route("/logout").post(userLogout)
 
 
 
