@@ -1,3 +1,7 @@
+- [Model link](https://app.eraser.io/workspace/Z0NTJLYeIIp8VZ4LQn0j?origin=share)
+
+
+
 # Summary of this project
 
 Project is to create  To-Do List application using JavaScript for both the frontend and backend. The application should allow users to add, edit, delete.
