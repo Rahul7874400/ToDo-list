@@ -35,9 +35,8 @@ const TodoForm =  ({ addTodo, hideTodoList, showTodoList }) => {
     } )
   },[] )
 
-  const deleteToDo = async (e)=>{
-    const {listId} = 
-    await axios.post('/api/v1/todo//create/delete',{
+  const deleteToDo = async (listId)=>{
+    await axios.delete('/api/v1/todo//create/delete',{
       params : {
         listId
       }
@@ -49,8 +48,19 @@ const TodoForm =  ({ addTodo, hideTodoList, showTodoList }) => {
       console.log("Somthing went worng while deleting the ToDo",error)
     } )
   }
-  const updateToDo = async (e)=>{
-    
+  const updateToDo = async (listId)=>{
+    await axios.patch('/api/v1/todo//create/update',{
+      params : {
+        listId
+      },
+      todo
+    })
+    .then( (res)=>{
+      console.log(res.data.data)
+    } )
+    .catch( (error)=>{
+      console.log("Something went worng while updating the list",error)
+    } )
   }
 
   return (
@@ -79,14 +89,14 @@ const TodoForm =  ({ addTodo, hideTodoList, showTodoList }) => {
                           images&cd=vfe&opi=89978449&ved=0CBMQjRxqF
                           woTCJjQl_XS64QDFQAAAAAdAAAAABAE" 
                           alt="delete" 
-                          onClick={deleteToDo}/>
+                          onClick={deleteToDo(todo._id)}/>
                 <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2
                           Fwww.pngwing.com%2Fen%2Fsearch%3Fq%3Dupdate&psig=
                           AOvVaw1Fked6Wt5UBjSLBvk2pW5h&ust=1710227277595000
                           &source=images&cd=vfe&opi=89978449&ved=0CBMQjRxqF
                           woTCJjG_dzU64QDFQAAAAAdAAAAABAE" 
                           alt="Update" 
-                          onClick={updateToDo}/>
+                          onClick={updateToDo(todo._id)}/>
               </div>
 
             } )
